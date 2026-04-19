@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Container geral */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(0deg, #000, #386de0);
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CARD DE CRIAÇÃO */
+.create-task {
+  width: min(92%, 35rem);
+  background-color: #fff;
+  margin-top: 8vh;
+  padding: 2rem 1.5rem 2.5rem;
+  border-radius: 1rem;
+}
+
+/* Título */
+.create-task h1 {
+  color: #002765;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  margin-bottom: 1rem;
+}
+
+.create-task h1 img {
+  width: 1.8rem;
+}
+
+/* Input */
+.create-task input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #edeef0;
+  font-weight: 500;
+  padding: 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Botão adicionar */
+.create-task button {
+  width: 100%;
+  border: none;
+  color: #fff;
+  padding: 0.7rem;
+  background: #386de0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 2rem;
+  transition: 0.3s;
+}
+
+.create-task button:hover {
+  background: #043480;
+  transform: scale(1.05);
+}
+
+/* Mensagem de erro */
+#error-message {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  display: none;
+}
+
+/* FILTROS */
+.filters {
+  width: min(92%, 35rem);
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.filters button {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 1rem;
+  border: none;
+  background: #edeef0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.filters button:hover {
+  background: #386de0;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* LISTA */
+.create-list {
+  width: min(92%, 35rem);
+  background: #fff;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+/* Itens */
+ul li {
+  list-style: none;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  padding: 0.8rem 0.5rem 0.8rem 2.5rem;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Ícone de check */
+ul li::before {
+  content: "";
+  position: absolute;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  background-image: url(assets/unchecked.png);
+  background-size: cover;
+  background-position: center;
+  top: 0.7rem;
+  left: 0.5rem;
+}
+
+/* Item marcado */
+ul li.checked {
+  color: #555;
+  text-decoration: line-through;
+}
+
+ul li.checked::before {
+  background-image: url(assets/checked2.png);
+}
+
+/* Botão remover (X) */
+ul li span {
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  text-align: center;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+ul li span:hover {
+  background: #ff0000;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+li span {
+  cursor: pointer;
+}
