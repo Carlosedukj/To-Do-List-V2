@@ -19,7 +19,8 @@ function emptyField() {
   let isError = false;
 
   if (inputContent.value === "") {
-    errorMessage.textContent = "Digite uma tarefa primeiro";
+    errorMessage.textContent = "Digite uma tarefa!";
+    errorMessage.style.display = "block";
     isError = true;
   } else {
     errorMessage.style.display = "none"; // Esconde o erro se estiver tudo ok
@@ -44,19 +45,25 @@ function addTask() {
   // Empurrando a tarefas para o array.
   tarefas.push(task);
 
-  // Salvando a tarefa e convertando o array em texto.
+  // Salvando a tarefa e convertendo o array em texto.
   localStorage.setItem("tarefas", JSON.stringify(tarefas));
 
   // Depois de adicionar a tarefa vamos limpar o input.
   inputContent.value = "";
 
-//   Atualizando a interface.
-  render ()
+  //   Atualizando a interface.
+  render();
 }
 
 // Criando evento de ação no click adicionar.
-buttonAdd.addEventListener("click", addTask)
+buttonAdd.addEventListener("click", addTask);
 
-function render () {
-
+// Criando a função para renderizar as li.
+function render() {
+  listContent.innerHTML = "";
+  tarefas.forEach(function (tarefa) {
+    const list = document.createElement("li");
+    list.textContent = tarefa.text;
+    listContent.appendChild(list);
+  });
 }
