@@ -6,11 +6,17 @@ const buttonCompleted = document.getElementById("completed-task");
 const buttonPending = document.getElementById("pending-task");
 const buttonAllTask = document.getElementById("all-task");
 const listContent = document.getElementById("list-content");
+const buttonConfirm = document.getElementById("button-confirm");
+const buttonCancel = document.getElementById("button-cancel");
+const modal = document.getElementById("modal");
 
-//
+// Selecionando o indice para remoção da tarefa.
+let indexRemove = null;
+
+// Convertendo o texto em array/objeto.
 const tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 
-//
+// Ativando o filtro.
 let activeFilter = "todas";
 
 // Validando campo vazio.
@@ -18,13 +24,22 @@ function emptyField() {
   // Variável para controlar se existe erro.
   let isError = false;
 
+  // Verificando se o input está vazio.
   if (inputContent.value === "") {
+    // Se o input estiver vazio vai aparecer a mensagem: "Digite uma tarefa!"
     errorMessage.textContent = "Digite uma tarefa!";
+
+    // Mostra a mensagem para o usuário.
     errorMessage.style.display = "block";
+
+    // Informando que tem erro caso input esteja vazio.
     isError = true;
   } else {
-    errorMessage.style.display = "none"; // Esconde o erro se estiver tudo ok
+    // Esconde o erro se estiver tudo ok.
+    errorMessage.style.display = "none";
   }
+
+  // Retorna o resultado final, se tiver erro mostra a mensagem, se não, não faz nada.
   return isError;
 }
 
@@ -60,10 +75,112 @@ buttonAdd.addEventListener("click", addTask);
 
 // Criando a função para renderizar as li.
 function render() {
+  // Limpa todo o conteúdo da lista antes de renderizar novamente para evitar duplicações.
   listContent.innerHTML = "";
-  tarefas.forEach(function (tarefa) {
+
+  let filteredTask = tarefas;
+
+  if (activeFilter === "concluidas") {
+    filteredTask = tarefas.filter(function (tarefa) {
+      return tarefa.completed === true;
+    });
+  }
+
+  if (activeFilter === "pendentes") {
+    filteredTask = tarefas.filter(function (tarefa) {
+      return tarefa.completed === false;
+    });
+  }
+
+  // Percorre o array de tarefas.
+  // Para cada tarefa, temos acesso:
+  // ao objeto da tarefa (tarefa).
+  // ao índice dela no array (indice).
+  filteredTask.forEach(function (tarefa, indice) {
+    // Criando uma  <li> que representará uma tarefa na interface.
     const list = document.createElement("li");
+
+    // Definindo o texto da tarefa dentro da <li>.
     list.textContent = tarefa.text;
+
+    // Adiciona a <li> dentro da lista no HTML, fazendo aparecer na tela.
+    listContent.appendChild(list);
+    // verifica se está concluída
+    if (tarefa.completed) {
+      list.classList.add("checked");
+    }
+
+    // Evento de clique na tarefa
+    list.addEventListener("click", function () {
+      toggleTask(indice);
+    });
+
+    // Criando botão para remover tarefa.
+    const buttonDelete = document.createElement("button");
+
+    // Adicionando ícone de lixeira.
+    buttonDelete.innerHTML = `<img src="assets/trash.svg" alt="remover" />`;
+
+    // Criando a classe para estilizar no css.
+    buttonDelete.classList.add("button-delete");
+
+    // Evento de clique para quando usuário clicar na lixeira.
+    buttonDelete.addEventListener("click", function (e) {
+      // impede o clique de subir para o <li>
+      e.stopPropagation();
+
+      // Chamando a função remover tarefa.
+      removeTask(indice);
+    });
+    // Adiciona o botão de deletar dentro do item da lista.
+    list.appendChild(buttonDelete);
+
+    // Adiciona o item completo na lista exibida na tela.
     listContent.appendChild(list);
   });
 }
+
+// Capturando evento do filtro concluídas.
+buttonCompleted.addEventListener("click", function () {
+  activeFilter = "concluidas";
+  render();
+});
+
+buttonPending.addEventListener("click", function () {
+  activeFilter = "pendentes";
+  render();
+});
+
+buttonAllTask.addEventListener("click", function () {
+  activeFilter = "todas";
+  render();
+});
+
+// Função para remover tarefa.
+function removeTask(indice) {
+  indexRemove = indice;
+  modal.style.display = "flex";
+}
+
+// Adicionando evento de confirmar
+buttonConfirm.addEventListener("click", function () {
+  tarefas.splice(indexRemove, 1);
+  modal.style.display = "none";
+
+  // Salvando a tarefa e renderizando após remover a tarefa desejada.
+  localStorage.setItem("tarefas", JSON.stringify(tarefas));
+  render();
+});
+
+buttonCancel.addEventListener("click", function () {
+  modal.style.display = "none";
+});
+
+// função separada
+function toggleTask(indice) {
+  tarefas[indice].completed = !tarefas[indice].completed;
+  localStorage.setItem("tarefas", JSON.stringify(tarefas));
+  render();
+}
+// Atualizando a tela que contém interface( parte principal que faz aparecer as tarefas na tela).
+render();

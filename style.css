@@ -32,13 +32,14 @@
   color: #002765;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   margin-bottom: 1rem;
 }
 
 .create-task h1 img {
-  width: 1.8rem;
+  width: 2rem;
 }
 
 /* Input */
@@ -121,10 +122,17 @@
 ul li {
   list-style: none;
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  padding: 0.8rem 0.5rem 0.8rem 2.5rem;
+  padding: 0.8rem 3.5rem 0.8rem 2.5rem; /* Aumentamos o padding da DIREITA (3.5rem) */
   user-select: none;
   cursor: pointer;
   position: relative;
+  
+  /* Adicione estas linhas */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  word-break: break-word; /* Força a quebra de palavras muito longas */
+  overflow-wrap: break-word;
 }
 
 /* Ícone de check */
@@ -137,8 +145,8 @@ ul li::before {
   background-image: url(assets/unchecked.png);
   background-size: cover;
   background-position: center;
-  top: 0.7rem;
-  left: 0.5rem;
+  top: 0.8rem;
+  left: 0.5rem; 
 }
 
 /* Item marcado */
@@ -149,6 +157,8 @@ ul li.checked {
 
 ul li.checked::before {
   background-image: url(assets/checked2.png);
+  border: 1px solid #c6a617;
+
 }
 
 /* Botão remover (X) */
@@ -173,4 +183,61 @@ ul li span:hover {
 
 li span {
   cursor: pointer;
+}
+
+.button-delete {
+  width: 25px;
+  height: 25px;
+  min-width: 25px; /* Impede que a lixeira seja "esmagada" pelo texto */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  
+  /* Em vez de position absolute, deixe o flexbox cuidar do lugar dela */
+  position: relative; 
+  margin-left: 10px; /* Garante um respiro entre o texto e o ícone */
+}
+
+.btn-confirm {
+  background: #386de0;
+  color: #fff;
+  padding: 0.6rem 2rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-cancel {
+  background: #ff0000;
+  color: #ffffff;
+  padding: 0.6rem 2rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: min(90%, 20rem);
 }

@@ -1,37 +1,48 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title> To-Do-List Version - 2 </title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="create-task">
-        
-        <h1><img src="assets/icon.png" alt="" /> 
-          Lista de Tarefas
-        </h1>
-        <input type="text" id="input-content" placeholder="Digite sua tarefa" />
-        <p id="error-message"></p>
-        <button id="button-add">Adicionar</button>
-      </div>
 
-      <div class="filters">
-        <button id="completed-task">Tarefas Concluídas</button>
-        <button id="penging-task">Tarefas Pendente</button>
-        <button id="all-task">Todas as Tarefas</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 
-      <div class="create-list">
-        <ul id="list-content">
-          <li>Task - 1</li>
-          <li>Task - 2</li>
-          <li>Task - 3</li>
-        </ul>
-      </div>
+  <title> To-Do-List Version - 2 </title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="create-task">
+
+      <h1><img src="assets/icon.png" alt="" />
+        Lista de Tarefas
+      </h1>
+      <input type="text" id="input-content" placeholder="Digite sua tarefa" />
+      <p id="error-message"></p>
+      <button id="button-add">Adicionar</button>
     </div>
-    <script src="script.js"></script>
-  </body>
+
+    <div class="filters">
+      <button id="completed-task">Tarefas Concluídas</button>
+      <button id="pending-task">Tarefas Pendente</button>
+      <button id="all-task">Todas as Tarefas</button>
+    </div>              
+
+    <div class="create-list">
+      <ul id="list-content">
+      </ul>
+    </div>
+
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <p>Deseja remover essa tarefa?</p>
+      <button id="button-confirm" class="btn-confirm">Sim</button>
+      <button id="button-cancel" class="btn-cancel">Não</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
