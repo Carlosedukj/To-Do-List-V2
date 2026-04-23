@@ -78,14 +78,17 @@ function render() {
   // Limpa todo o conteúdo da lista antes de renderizar novamente para evitar duplicações.
   listContent.innerHTML = "";
 
+  // Filtro de tarefas
   let filteredTask = tarefas;
 
+  // Verificando se as tarefas estão concluídas.
   if (activeFilter === "concluidas") {
     filteredTask = tarefas.filter(function (tarefa) {
       return tarefa.completed === true;
     });
   }
 
+    // Verificando se as tarefas estão pendentes.
   if (activeFilter === "pendentes") {
     filteredTask = tarefas.filter(function (tarefa) {
       return tarefa.completed === false;
@@ -146,11 +149,13 @@ buttonCompleted.addEventListener("click", function () {
   render();
 });
 
+// Capturando evento do filtro pendentes.
 buttonPending.addEventListener("click", function () {
   activeFilter = "pendentes";
   render();
 });
 
+// Capturando evento do filtro todas.
 buttonAllTask.addEventListener("click", function () {
   activeFilter = "todas";
   render();
@@ -172,11 +177,12 @@ buttonConfirm.addEventListener("click", function () {
   render();
 });
 
+// Quando o usuário clica em "Não", ele só esconde o modal sem fazer nada com a tarefa.
 buttonCancel.addEventListener("click", function () {
   modal.style.display = "none";
 });
 
-// função separada
+// Função responsável por alternar o estado de conclusão de uma tarefa.
 function toggleTask(indice) {
   tarefas[indice].completed = !tarefas[indice].completed;
   localStorage.setItem("tarefas", JSON.stringify(tarefas));
