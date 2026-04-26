@@ -47,3 +47,5 @@ Esse foi meu terceiro projeto construído do zero, e o mais complexo até agora.
 - **stopPropagation** — impedir que eventos se propaguem para elementos pai
 - **Modal customizado** — substituir o `confirm()` nativo por um modal estilizado
 - **Índices de array** — usar a posição de cada item para operações de toggle e remoção
+
+# Acesse o projeto: https://to-do-lis-v2.netlify.app/
